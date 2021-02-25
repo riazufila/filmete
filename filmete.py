@@ -12,9 +12,9 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 bot = commands.Bot(command_prefix=">")
 
 
-@bot.command(name='room')
+@bot.command(name='create-room')
 async def createRoom(context):
-    response = "Implement Watch2Gether API here."
+    response = "Get working and make sure the API is implemented!"
 
     await context.send(response)
 
