@@ -1,22 +1,46 @@
 #!/usr/bin/env python
 
 import os
+import json  # Handle json format data
+import requests  # To handle HTTP requests
 from discord.ext import commands
 from dotenv import load_dotenv
 
 # Load env file
 load_dotenv()
 
-# Assign variables
+# Initialize secrets
 TOKEN = os.getenv("DISCORD_TOKEN")
+W2G_API_KEY = os.getenv("W2G_API_KEY")
+
+# Discord command prefix
 bot = commands.Bot(command_prefix=">")
 
 
-@bot.command(name='create-room')
-async def createRoom(context):
-    response = "Get working and make sure the API is implemented!"
+# Bot commands
+@bot.command(name="create")
+async def createRoom(context, video_url):
+    # The url to POST
+    api_url = "https://w2g.tv/rooms/create.json"
 
-    await context.send(response)
+    # POST's body
+    payload = {
+        "w2g_api_key": W2G_API_KEY,
+        "share": video_url,
+        "bg_color": "#000000",
+        "bg_opacity": "90"
+    }
+
+    # POST's header
+    header = {"content-type": "application/json", "charset": "utf-8"}
+
+    # POST request
+    response = requests.post(api_url, data=json.dumps(payload), headers=header)
+    streamkey = response.json().get("streamkey")
+    room_url = f"https://w2g.tv/rooms/{streamkey}"
+
+    await context.send(room_url)
 
 
+# Run bot with TOKEN
 bot.run(TOKEN)
