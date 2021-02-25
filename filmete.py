@@ -27,7 +27,7 @@ async def createRoom(context, video_url):
     payload = {
         "w2g_api_key": W2G_API_KEY,
         "share": video_url,
-        "bg_color": "#000000",
+        "bg_color": "#4A473F",
         "bg_opacity": "90"
     }
 
