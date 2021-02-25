@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Assign variables
-token = os.getenv("DISCORD_TOKEN")
+TOKEN = os.getenv("DISCORD_TOKEN")
 client = discord.Client()
 
 
@@ -17,4 +17,4 @@ async def on_ready():
     print(f"{client.user} has connected to Discord!")
 
 
-client.run(token)
+client.run(TOKEN)
