@@ -19,7 +19,7 @@ bot = commands.Bot(command_prefix=">")
 
 # Create rooms
 @bot.command(name="create")
-async def createRoom(context, video_url):
+async def createRoom(ctx, video_url):
     # The url to POST
     api_url = "https://w2g.tv/rooms/create.json"
 
@@ -39,7 +39,7 @@ async def createRoom(context, video_url):
     streamkey = response.json().get("streamkey")
     room_url = f"https://w2g.tv/rooms/{streamkey}"
 
-    await context.send(room_url)
+    await ctx.send(room_url)
 
 
 # Run bot with TOKEN
