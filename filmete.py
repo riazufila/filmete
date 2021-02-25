@@ -17,7 +17,7 @@ W2G_API_KEY = os.getenv("W2G_API_KEY")
 bot = commands.Bot(command_prefix=">")
 
 
-# Bot commands
+# Create rooms
 @bot.command(name="create")
 async def createRoom(context, video_url):
     # The url to POST
