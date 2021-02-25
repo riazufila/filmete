@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-import discord
+from discord.ext import commands
 from dotenv import load_dotenv
 
 # Load env file
@@ -9,12 +9,14 @@ load_dotenv()
 
 # Assign variables
 TOKEN = os.getenv("DISCORD_TOKEN")
-client = discord.Client()
+bot = commands.Bot(command_prefix=">")
 
 
-@client.event
-async def on_ready():
-    print(f"{client.user} has connected to Discord!")
+@bot.command(name='create-room')
+async def createRoom(context):
+    response = "Get working and make sure the API is implemented!"
+
+    await context.send(response)
 
 
-client.run(TOKEN)
+bot.run(TOKEN)
