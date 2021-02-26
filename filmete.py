@@ -15,7 +15,8 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 W2G_API_KEY = os.getenv("W2G_API_KEY")
 
 # Discord command prefix
-bot = commands.Bot(command_prefix=">")
+help_command = commands.DefaultHelpCommand(no_category="Commands", indent=4)
+bot = commands.Bot(command_prefix=">", help_command=help_command)
 
 
 # Room creation with Watch2Gether API
