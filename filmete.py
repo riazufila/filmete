@@ -42,5 +42,12 @@ async def createRoom(ctx, video_url):
     await ctx.send(room_url)
 
 
+@bot.command(name="remind-at")
+async def remindAt(ctx, time):
+    #TODO
+
+    await ctx.send(f"I will remind you at {time}")
+
+
 # Run bot with TOKEN
 bot.run(TOKEN)
