@@ -83,7 +83,7 @@ async def remind(ctx, duration, subject):
             f"Sure, <@{ctx.author.id}>. I will remind you soon. *smirks*")
         await asyncio.sleep(local_time)
         await ctx.send(
-            f"Yo, <@{ctx.author.id}>! It has already been {duration}! `{subject}`"
+            f"Yo, <@{ctx.author.id}>! It has already been {duration}!\n`{subject}`"
         )
     else:
         await ctx.send("Are you drunk?")
