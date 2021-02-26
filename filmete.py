@@ -18,9 +18,7 @@ W2G_API_KEY = os.getenv("W2G_API_KEY")
 bot = commands.Bot(command_prefix=">")
 
 
-# Create rooms
-@bot.command(name="create")
-async def createRoom(ctx, video_url):
+def roomCreation(video_url):
     # The url to POST
     api_url = "https://w2g.tv/rooms/create.json"
 
@@ -40,7 +38,16 @@ async def createRoom(ctx, video_url):
     streamkey = response.json().get("streamkey")
     room_url = f"https://w2g.tv/rooms/{streamkey}"
 
-    await ctx.send(room_url)
+    return room_url
+
+
+# Create rooms
+@bot.command()
+async def create(ctx, video_url):
+
+    result = roomCreation(video_url)
+
+    await ctx.send(result)
 
 
 # Reminder bot command
@@ -88,28 +95,8 @@ async def remind(ctx, duration, subject):
         if not "http" in subject:
             await ctx.send(f"> {subject}")
         else:
-            # The url to POST
-            api_url = "https://w2g.tv/rooms/create.json"
-
-            # POST's body
-            payload = {
-                "w2g_api_key": W2G_API_KEY,
-                "share": subject,
-                "bg_color": "#4A473F",
-                "bg_opacity": "90"
-            }
-
-            # POST's header
-            header = {"content-type": "application/json", "charset": "utf-8"}
-
-            # POST request
-            response = requests.post(api_url,
-                                     data=json.dumps(payload),
-                                     headers=header)
-            streamkey = response.json().get("streamkey")
-            room_url = f"https://w2g.tv/rooms/{streamkey}"
-
-            await ctx.send(room_url)
+            result = roomCreation(subject)
+            await ctx.send(result)
     else:
         await ctx.send("Are you drunk?")
 
