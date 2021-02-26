@@ -84,7 +84,32 @@ async def remind(ctx, duration, subject):
         await asyncio.sleep(local_time)
         await ctx.send(
             f"Yo, <@{ctx.author.id}>! It has already been {duration}!")
-        await ctx.send(f"> {subject}")
+
+        if not "http" in subject:
+            await ctx.send(f"> {subject}")
+        else:
+            # The url to POST
+            api_url = "https://w2g.tv/rooms/create.json"
+
+            # POST's body
+            payload = {
+                "w2g_api_key": W2G_API_KEY,
+                "share": subject,
+                "bg_color": "#4A473F",
+                "bg_opacity": "90"
+            }
+
+            # POST's header
+            header = {"content-type": "application/json", "charset": "utf-8"}
+
+            # POST request
+            response = requests.post(api_url,
+                                     data=json.dumps(payload),
+                                     headers=header)
+            streamkey = response.json().get("streamkey")
+            room_url = f"https://w2g.tv/rooms/{streamkey}"
+
+            await ctx.send(room_url)
     else:
         await ctx.send("Are you drunk?")
 
