@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import time
 import json  # Handle json format data
 import requests  # To handle HTTP requests
 from discord.ext import commands
@@ -42,11 +43,20 @@ async def createRoom(ctx, video_url):
     await ctx.send(room_url)
 
 
+# Remind at N time
 @bot.command(name="remind-at")
 async def remindAt(ctx, time):
     #TODO
 
     await ctx.send(f"I will remind you at {time}")
+
+
+# Remind at N time
+@bot.command(name="remind-in")
+async def remindIn(ctx, time):
+    #TODO
+
+    await ctx.send(f"I will remind you in {time}")
 
 
 # Run bot with TOKEN
