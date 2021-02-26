@@ -49,31 +49,34 @@ async def remind(ctx, duration):
 
     local_time = 0
 
-    if duration.lower().endswith("s"):
-        local_time = int(duration[:-1])
-
-        if int(duration[:-1]) > 1:
-            duration = duration[:-1] + " seconds"
-        else:
-            duration = duration[:-1] + " second"
-    elif duration.lower().endswith("m"):
-        local_time = int(duration[:-1]) * 60
-
-        if int(duration[:-1]) > 1:
-            duration = duration[:-1] + " minutes"
-        else:
-            duration = duration[:-1] + " minute"
-    elif duration.lower().endswith("h"):
-        local_time = int(duration[:-1]) * 60 * 60
-
-        if int(duration[:-1]) > 1:
-            duration = duration[:-1] + " hours"
-        else:
-            duration = duration[:-1] + " hour"
+    if int(duration[:-1]) < 1:
+        await ctx.send("What are you doing? Set up a proper duration!")
     else:
-        await ctx.send(
-            "Please specify whether to use seconds, minutes, or hours such as '>remind 1h'."
-        )
+        if duration.lower().endswith("s"):
+            local_time = int(duration[:-1])
+
+            if int(duration[:-1]) > 1:
+                duration = duration[:-1] + " seconds"
+            else:
+                duration = duration[:-1] + " second"
+        elif duration.lower().endswith("m"):
+            local_time = int(duration[:-1]) * 60
+
+            if int(duration[:-1]) > 1:
+                duration = duration[:-1] + " minutes"
+            else:
+                duration = duration[:-1] + " minute"
+        elif duration.lower().endswith("h"):
+            local_time = int(duration[:-1]) * 60 * 60
+
+            if int(duration[:-1]) > 1:
+                duration = duration[:-1] + " hours"
+            else:
+                duration = duration[:-1] + " hour"
+        else:
+            await ctx.send(
+                "Please specify whether to use seconds, minutes, or hours such as '>remind 1h'."
+            )
 
     if local_time:
         await ctx.send(
