@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import os
-import time
+import asyncio
 import json  # Handle json format data
 import requests  # To handle HTTP requests
 from discord.ext import commands
@@ -43,20 +43,46 @@ async def createRoom(ctx, video_url):
     await ctx.send(room_url)
 
 
-# Remind at N time
-@bot.command(name="remind-at")
-async def remindAt(ctx, time):
-    #TODO
+# Reminder bot command
+@bot.command()
+async def remind(ctx, duration):
 
-    await ctx.send(f"I will remind you at {time}")
+    local_time = 0
 
+    if duration.lower().endswith("s"):
+        local_time = int(duration[:-1])
 
-# Remind in N time
-@bot.command(name="remind-in")
-async def remindIn(ctx, time):
-    #TODO
+        if int(duration[:-1]) > 1:
+            duration = duration[:-1] + " seconds"
+        else:
+            duration = duration[:-1] + " second"
+    elif duration.lower().endswith("m"):
+        local_time = int(duration[:-1]) * 60
 
-    await ctx.send(f"I will remind you in {time}")
+        if int(duration[:-1]) > 1:
+            duration = duration[:-1] + " minutes"
+        else:
+            duration = duration[:-1] + " minute"
+    elif duration.lower().endswith("h"):
+        local_time = int(duration[:-1]) * 60 * 60
+
+        if int(duration[:-1]) > 1:
+            duration = duration[:-1] + " hours"
+        else:
+            duration = duration[:-1] + " hour"
+    else:
+        await ctx.send(
+            "Please specify whether to use seconds, minutes, or hours such as '>remind 1h'."
+        )
+
+    if local_time:
+        await ctx.send(
+            f"Sure, <@{ctx.author.id}>. I will remind you soon. *smirks*")
+        await asyncio.sleep(local_time)
+        await ctx.send(
+            f"Yo, <@{ctx.author.id}>! It has already been {duration}!")
+    else:
+        await ctx.send("Are you drunk?")
 
 
 # Run bot with TOKEN
