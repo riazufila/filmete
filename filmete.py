@@ -45,7 +45,7 @@ async def createRoom(ctx, video_url):
 
 # Reminder bot command
 @bot.command()
-async def remind(ctx, duration):
+async def remind(ctx, duration, subject):
 
     local_time = 0
 
@@ -83,7 +83,8 @@ async def remind(ctx, duration):
             f"Sure, <@{ctx.author.id}>. I will remind you soon. *smirks*")
         await asyncio.sleep(local_time)
         await ctx.send(
-            f"Yo, <@{ctx.author.id}>! It has already been {duration}!")
+            f"Yo, <@{ctx.author.id}>! It has already been {duration}! `{subject}`"
+        )
     else:
         await ctx.send("Are you drunk?")
 
