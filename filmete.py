@@ -18,6 +18,7 @@ W2G_API_KEY = os.getenv("W2G_API_KEY")
 bot = commands.Bot(command_prefix=">")
 
 
+# Room creation with Watch2Gether API
 def roomCreation(video_url):
     # The url to POST
     api_url = "https://w2g.tv/rooms/create.json"
@@ -41,7 +42,7 @@ def roomCreation(video_url):
     return room_url
 
 
-# Create rooms
+# Create room command
 @bot.command()
 async def create(ctx, video_url):
 
@@ -50,7 +51,7 @@ async def create(ctx, video_url):
     await ctx.send(result)
 
 
-# Reminder bot command
+# Reminder command
 @bot.command()
 async def remind(ctx, duration, subject):
 
