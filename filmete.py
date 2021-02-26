@@ -15,8 +15,10 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 W2G_API_KEY = os.getenv("W2G_API_KEY")
 
 # Discord command prefix
-help_command = commands.DefaultHelpCommand(no_category="Commands", indent=4)
-bot = commands.Bot(command_prefix=">", help_command=help_command)
+# help_command = commands.DefaultHelpCommand(no_category="Commands", indent=4)
+bot = commands.Bot(command_prefix=">")
+bot.remove_command("help")
+cogs = ["cogs.embed_help.help"]
 
 
 # Room creation with Watch2Gether API
@@ -101,6 +103,14 @@ async def remind(ctx, duration, subject_or_url):
             await ctx.send(result)
     else:
         await ctx.send("Are you drunk?")
+
+
+# On ready event
+@bot.event
+async def on_ready():
+    print(f"{bot.user} is now online! Rock on!")
+    for cog in cogs:
+        bot.load_extension(cog)
 
 
 # Run bot with TOKEN
