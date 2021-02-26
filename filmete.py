@@ -51,7 +51,7 @@ async def remindAt(ctx, time):
     await ctx.send(f"I will remind you at {time}")
 
 
-# Remind at N time
+# Remind in N time
 @bot.command(name="remind-in")
 async def remindIn(ctx, time):
     #TODO
