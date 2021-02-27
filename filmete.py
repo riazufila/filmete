@@ -13,13 +13,16 @@ if __name__ == "__main__":
     help_command = commands.DefaultHelpCommand(no_category="Commands",
                                                indent=4)
     bot = commands.Bot(
-        command_prefix=">",
+        command_prefix=";",
         description=
-        "A Discord Bot to create a virtual room to watch videos together via Watch2Gether API.",
+        'A Discord Bot to create a virtual room for synced streaming.',
         help_command=help_command)
 
+    # Remove default help command
+    bot.remove_command("help")
+
     # Load extensions (cog)
-    extensions = ["cogs.room"]
+    extensions = ["cogs.room", "cogs.help"]
 
     for extension in extensions:
         bot.load_extension(extension)

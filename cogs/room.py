@@ -47,43 +47,43 @@ class Room(commands.Cog):
         return room_url
 
     # Create room command
-    @commands.command(help="Creates room in Watch2Gether.")
-    async def create(self, ctx, video_url):
+    @commands.command(name="create", help="Creates room in Watch2Gether.")
+    async def create(self, ctx, url):
 
-        result = self.roomCreation(video_url)
+        result = self.roomCreation(url)
 
         await ctx.send(result)
 
     # Reminder command
-    @commands.command(help="Set a reminder")
-    async def remind(self, ctx, duration, subject_or_url):
+    @commands.command(name="remind", help="Set a reminder")
+    async def remind(self, ctx, period, url):
 
         local_time = 0
 
-        if int(duration[:-1]) < 1:
-            await ctx.send("What are you doing? Set up a proper duration!")
+        if int(period[:-1]) < 1:
+            await ctx.send("What are you doing? Set up a proper period!")
         else:
-            if duration.lower().endswith("s"):
-                local_time = int(duration[:-1])
+            if period.lower().endswith("s"):
+                local_time = int(period[:-1])
 
-                if int(duration[:-1]) > 1:
-                    duration = duration[:-1] + " seconds"
+                if int(period[:-1]) > 1:
+                    period = period[:-1] + " seconds"
                 else:
-                    duration = duration[:-1] + " second"
-            elif duration.lower().endswith("m"):
-                local_time = int(duration[:-1]) * 60
+                    period = period[:-1] + " second"
+            elif period.lower().endswith("m"):
+                local_time = int(period[:-1]) * 60
 
-                if int(duration[:-1]) > 1:
-                    duration = duration[:-1] + " minutes"
+                if int(period[:-1]) > 1:
+                    period = period[:-1] + " minutes"
                 else:
-                    duration = duration[:-1] + " minute"
-            elif duration.lower().endswith("h"):
-                local_time = int(duration[:-1]) * 60 * 60
+                    period = period[:-1] + " minute"
+            elif period.lower().endswith("h"):
+                local_time = int(period[:-1]) * 60 * 60
 
-                if int(duration[:-1]) > 1:
-                    duration = duration[:-1] + " hours"
+                if int(period[:-1]) > 1:
+                    period = period[:-1] + " hours"
                 else:
-                    duration = duration[:-1] + " hour"
+                    period = period[:-1] + " hour"
             else:
                 await ctx.send(
                     "Please specify whether to use seconds, minutes, or hours such as '>remind 1h'."
@@ -94,16 +94,16 @@ class Room(commands.Cog):
                 f"Sure, <@{ctx.author.id}>. I will remind you soon. *smirks*")
             await asyncio.sleep(local_time)
             await ctx.send(
-                f"Yo, <@{ctx.author.id}>! It has already been {duration}!")
+                f"Yo, <@{ctx.author.id}>! It has already been {period}!")
 
-            if not "http" in subject_or_url:
-                subject_or_url = '"' + subject_or_url + '"'
+            if not "http" in url:
+                url = '"' + url + '"'
                 embed = discord.Embed(title="You forgetting something?",
-                                      description=subject_or_url,
+                                      description=url,
                                       color=0x000000)
                 await ctx.send(embed=embed)
             else:
-                result = self.roomCreation(subject_or_url)
+                result = self.roomCreation(url)
                 await ctx.send(result)
         else:
             await ctx.send("Are you drunk?")
