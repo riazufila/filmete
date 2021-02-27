@@ -4,6 +4,7 @@ import os
 import asyncio
 import json  # Handle json format data
 import requests  # To handle HTTP requests
+import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -40,7 +41,14 @@ def roomCreation(video_url):
     streamkey = response.json().get("streamkey")
     room_url = f"https://w2g.tv/rooms/{streamkey}"
 
-    return room_url
+    embed = discord.Embed(
+        title="Let's watch together?",
+        description=
+        "This is a room created in Watch2Gether for you to watch together with you friends.",
+        color=0x000000)
+    embed.add_field(name="Room's URL", value=room_url)
+
+    return embed
 
 
 # Create room command
@@ -49,7 +57,7 @@ async def create(ctx, video_url):
 
     result = roomCreation(video_url)
 
-    await ctx.send(result)
+    await ctx.send(embed=result)
 
 
 # Reminder command
@@ -98,7 +106,7 @@ async def remind(ctx, duration, subject_or_url):
             await ctx.send(f"> {subject_or_url}")
         else:
             result = roomCreation(subject_or_url)
-            await ctx.send(result)
+            await ctx.send(embed=result)
     else:
         await ctx.send("Are you drunk?")
 
