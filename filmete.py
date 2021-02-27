@@ -13,7 +13,7 @@ if __name__ == "__main__":
     help_command = commands.DefaultHelpCommand(no_category="Commands",
                                                indent=4)
     bot = commands.Bot(
-        command_prefix=">",
+        command_prefix=";",
         description=
         'A Discord Bot to create a virtual room for synced streaming.',
         help_command=help_command)

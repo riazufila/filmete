@@ -4,7 +4,7 @@
 import discord
 from discord.ext import commands
 
-prefix = '>'
+prefix = ';'
 bot_title = 'Filmete'
 bot_description = 'A Discord Bot to create a virtual room for synced streaming.'
 bottom_info = ''
