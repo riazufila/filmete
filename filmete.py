@@ -15,7 +15,8 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 W2G_API_KEY = os.getenv("W2G_API_KEY")
 
 # Discord command prefix
-bot = commands.Bot(command_prefix=">")
+help_command = commands.DefaultHelpCommand(no_category="Commands", indent=4)
+bot = commands.Bot(command_prefix=">", help_command=help_command)
 
 
 # Room creation with Watch2Gether API
@@ -43,7 +44,7 @@ def roomCreation(video_url):
 
 
 # Create room command
-@bot.command()
+@bot.command(help="Creates room in Watch2Gether.")
 async def create(ctx, video_url):
 
     result = roomCreation(video_url)
@@ -52,8 +53,8 @@ async def create(ctx, video_url):
 
 
 # Reminder command
-@bot.command()
-async def remind(ctx, duration, subject):
+@bot.command(help="Set a reminder")
+async def remind(ctx, duration, subject_or_url):
 
     local_time = 0
 
@@ -93,10 +94,10 @@ async def remind(ctx, duration, subject):
         await ctx.send(
             f"Yo, <@{ctx.author.id}>! It has already been {duration}!")
 
-        if not "http" in subject:
-            await ctx.send(f"> {subject}")
+        if not "http" in subject_or_url:
+            await ctx.send(f"> {subject_or_url}")
         else:
-            result = roomCreation(subject)
+            result = roomCreation(subject_or_url)
             await ctx.send(result)
     else:
         await ctx.send("Are you drunk?")
