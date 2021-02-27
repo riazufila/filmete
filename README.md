@@ -14,9 +14,7 @@ Finally, clone the repository and execute Filmete.
 
 ## Bot Commands
 
-Each command should be started with the prefix, ";".
-
-Such that ";create \<url\>" or ";remind \<period\> \<url\>".
+The character ";" is our bot's prefix. Hence, every command is expected to start with the said prefix.
 
 | Commands |     Parameters     | Description                   |
 | :------: | :----------------: | ----------------------------- |
