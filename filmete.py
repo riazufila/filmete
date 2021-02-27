@@ -103,7 +103,11 @@ async def remind(ctx, duration, subject_or_url):
             f"Yo, <@{ctx.author.id}>! It has already been {duration}!")
 
         if not "http" in subject_or_url:
-            await ctx.send(f"> {subject_or_url}")
+            subject_or_url = '"' + subject_or_url + '"'
+            embed = discord.Embed(title="You forgetting something?",
+                                  description=subject_or_url,
+                                  color=0x000000)
+            await ctx.send(embed=embed)
         else:
             result = roomCreation(subject_or_url)
             await ctx.send(embed=result)
