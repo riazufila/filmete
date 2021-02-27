@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import random
 import requests
 import json
 import asyncio
@@ -95,13 +96,24 @@ class Room(commands.Cog):
                 else:
                     period = period[:-1] + " hour"
             else:
-                await ctx.send(
-                    "Please specify whether to use seconds, minutes, or hours such as '>remind 1h'."
-                )
+                reply = [
+                    "Please specify whether to use seconds, minutes, or hours such as ';remind 1h'.",
+                    "Maybe you don't know this.. But you should specify if its seconds, minutes, or hours. ';remind 5m for example?'",
+                    "Check the docs man!",
+                    "Wrong command! Wrong! Wrong! Wrong!",
+                    "Use 's' for seconds, 'm' for minutes, and 'h' for hours. For example, 10m."
+                ]
+                await ctx.send(random.choice(reply))
 
         if local_time:
-            await ctx.send(
-                f"Sure, <@{ctx.author.id}>. I will remind you soon. *smirks*")
+            reply = [
+                f"Sure, <@{ctx.author.id}>. I will remind you soon. *smirks*",
+                f"I know you always forget things, <@{ctx.author.id}>.. I got you!",
+                f"I'm getting tired of always reminding <@{ctx.author.id}>",
+                f"Sigh.. Please, <@{ctx.author.id}>. I'm getting annoyed.",
+                f"This must be so important for you to disturb me, <@{ctx.author.id}>!"
+            ]
+            await ctx.send(random.choice(reply))
             await asyncio.sleep(local_time)
             await ctx.send(
                 f"Yo, <@{ctx.author.id}>! It has already been {period}!")
@@ -116,7 +128,11 @@ class Room(commands.Cog):
                 result = self.roomCreation(url)
                 await ctx.send(embed=result)
         else:
-            await ctx.send("Are you drunk?")
+            reply = [
+                "Are you drunk?", "You.. typing right?", "Ahahahaha, funny.",
+                "DON'T DARE!", "LOL WRONG HAHA!"
+            ]
+            await ctx.send(random.choice(reply))
 
 
 def setup(bot):
