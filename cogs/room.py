@@ -97,11 +97,11 @@ class Room(commands.Cog):
                     period = period[:-1] + " hour"
             else:
                 reply = [
-                    "Please specify whether to use seconds, minutes, or hours such as ';remind 1h'.",
-                    "Maybe you don't know this.. But you should specify if its seconds, minutes, or hours. ';remind 5m for example?'",
-                    "Check the docs man!",
-                    "Wrong command! Wrong! Wrong! Wrong!",
-                    "Use 's' for seconds, 'm' for minutes, and 'h' for hours. For example, 10m."
+                    f"Hey, <@{ctx.author.id}>. Please specify whether to use seconds, minutes, or hours such as ';remind 1h'.",
+                    f"<@{ctx.author.id}>, maybe you don't know this.. But you should specify if its seconds, minutes, or hours. ';remind 5m for example?'",
+                    f"Check the docs, <@{ctx.author.id}>!",
+                    f"Wrong command! Wrong! Wrong! Wrong! <@{ctx.author.id}>, you're wrong!",
+                    f"Use 's' for seconds, 'm' for minutes, and 'h' for hours. For example, 10m. Please, get in the game, <@{ctx.author.id}>."
                 ]
                 await ctx.send(random.choice(reply))
 
@@ -129,8 +129,11 @@ class Room(commands.Cog):
                 await ctx.send(embed=result)
         else:
             reply = [
-                "Are you drunk?", "You..  alright?", "Ahahahaha, funny.",
-                "DON'T DARE ENTER THE WRONG COMMAND!", "LOL WRONG HAHA!"
+                f"Are you drunk, <@{ctx.author.id}>?",
+                f"<@{ctx.author.id}>.. You..  alright?",
+                f"Ahahahaha, funny, <@{ctx.author.id}>.",
+                f"DON'T DARE ENTER THE WRONG COMMAND, <@{ctx.author.id}>!",
+                f"LOL WRONG HAHA, <@{ctx.author.id}>!"
             ]
             await ctx.send(random.choice(reply))
 
