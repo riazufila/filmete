@@ -23,28 +23,38 @@ class Room(commands.Cog):
 
     # Room creation with Watch2Gether API
     def roomCreation(self, video_url):
-        # The url to POST
-        api_url = "https://w2g.tv/rooms/create.json"
+        if not "http" in video_url:
+            return "Is that even a valid url?"
+        else:
+            # The url to POST
+            api_url = "https://w2g.tv/rooms/create.json"
 
-        # POST's body
-        payload = {
-            "w2g_api_key": self.W2G_API_KEY,
-            "share": video_url,
-            "bg_color": "#4A473F",
-            "bg_opacity": "90"
-        }
+            # POST's body
+            payload = {
+                "w2g_api_key": self.W2G_API_KEY,
+                "share": video_url,
+                "bg_color": "#4A473F",
+                "bg_opacity": "90"
+            }
 
-        # POST's header
-        header = {"content-type": "application/json", "charset": "utf-8"}
+            # POST's header
+            header = {"content-type": "application/json", "charset": "utf-8"}
 
-        # POST request
-        response = requests.post(api_url,
-                                 data=json.dumps(payload),
-                                 headers=header)
-        streamkey = response.json().get("streamkey")
-        room_url = f"https://w2g.tv/rooms/{streamkey}"
+            # POST request
+            response = requests.post(api_url,
+                                     data=json.dumps(payload),
+                                     headers=header)
+            streamkey = response.json().get("streamkey")
+            room_url = f"https://w2g.tv/rooms/{streamkey}"
 
-        return room_url
+            embed = discord.Embed(
+                title="Let's watch together?",
+                description=
+                "This is a room created in Watch2Gether for you to watch together with you friends.",
+                color=0x000000)
+            embed.add_field(name="Room's URL", value=room_url)
+
+            return embed
 
     # Create room command
     @commands.command(name="create", help="Creates room in Watch2Gether.")
@@ -52,7 +62,7 @@ class Room(commands.Cog):
 
         result = self.roomCreation(url)
 
-        await ctx.send(result)
+        await ctx.send(embed=result)
 
     # Reminder command
     @commands.command(name="remind", help="Set a reminder")
@@ -104,7 +114,7 @@ class Room(commands.Cog):
                 await ctx.send(embed=embed)
             else:
                 result = self.roomCreation(url)
-                await ctx.send(result)
+                await ctx.send(embed=result)
         else:
             await ctx.send("Are you drunk?")
 
