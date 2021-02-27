@@ -71,31 +71,48 @@ class Room(commands.Cog):
 
         local_time = 0
 
-        if int(period[:-1]) < 1:
-            await ctx.send("What are you doing? Set up a proper period!")
-        else:
-            if period.lower().endswith("s"):
-                local_time = int(period[:-1])
+        # if int(period) < 10:
+        #     await ctx.send("What are you doing? Set up a proper period!")
+        # elif int(period[:-1]) < 1:
+        #     await ctx.send("What are you doing? Set up a proper period!")
+        if (period.lower().endswith("s") or period.lower().endswith("m")
+                or period.lower().endswith("h")) and len(period) > 1:
+            if (period[-2:-1] >= "a"
+                    and period[-2:-1] <= "z") or (period[-2:-1] >= "A"
+                                                  and period[-2:-1] <= "Z"):
+                await ctx.send(
+                    f"I'm getting tired of these wrong commands, <@{ctx.author.id}>"
+                )
+            elif int(period[:-1]) > 0:
+                if period.lower().endswith("s"):
+                    local_time = int(period[:-1])
 
-                if int(period[:-1]) > 1:
-                    period = period[:-1] + " seconds"
-                else:
-                    period = period[:-1] + " second"
-            elif period.lower().endswith("m"):
-                local_time = int(period[:-1]) * 60
+                    if int(period[:-1]) > 1:
+                        period = period[:-1] + " seconds"
+                    else:
+                        period = period[:-1] + " second"
+                elif period.lower().endswith("m"):
+                    local_time = int(period[:-1]) * 60
 
-                if int(period[:-1]) > 1:
-                    period = period[:-1] + " minutes"
+                    if int(period[:-1]) > 1:
+                        period = period[:-1] + " minutes"
+                    else:
+                        period = period[:-1] + " minute"
                 else:
-                    period = period[:-1] + " minute"
-            elif period.lower().endswith("h"):
-                local_time = int(period[:-1]) * 60 * 60
+                    local_time = int(period[:-1]) * 60 * 60
 
-                if int(period[:-1]) > 1:
-                    period = period[:-1] + " hours"
-                else:
-                    period = period[:-1] + " hour"
+                    if int(period[:-1]) > 1:
+                        period = period[:-1] + " hours"
+                    else:
+                        period = period[:-1] + " hour"
             else:
+                await ctx.send(
+                    "You need to enter a real value for time. Guess what? 0 is not one of them."
+                )
+        elif len(period) > 1:
+            if (period[len(period) - 1] >= "a" and period[len(period) - 1] <=
+                    "z") or (period[len(period) - 1] >= "A"
+                             and period[len(period) - 1] <= "Z"):
                 reply = [
                     f"Hey, <@{ctx.author.id}>. Please specify whether to use seconds, minutes, or hours such as ';remind 1h'.",
                     f"<@{ctx.author.id}>, maybe you don't know this.. But you should specify if its seconds, minutes, or hours. ';remind 5m for example?'",
@@ -104,6 +121,13 @@ class Room(commands.Cog):
                     f"Use 's' for seconds, 'm' for minutes, and 'h' for hours. For example, 10m. Please, get in the game, <@{ctx.author.id}>."
                 ]
                 await ctx.send(random.choice(reply))
+        else:
+            reply = [
+                f"That's only one character. Don't mess with me, <@{ctx.author.id}>.",
+                f"You, <@{ctx.author.id}>! You really think that one digit is enough to make a reminder?",
+                f"Don't make me go out there and smack you, <@{ctx.author.id}>!"
+            ]
+            await ctx.send(random.choice(reply))
 
         if local_time:
             reply = [
