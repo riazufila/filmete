@@ -66,7 +66,7 @@ class Room(commands.Cog):
         await ctx.send(embed=result)
 
     # Reminder command
-    @commands.command(name="remind", help="Set a reminder")
+    @commands.command(name="remind", help="Set a reminder.")
     async def remind(self, ctx, period, url):
 
         local_time = 0
