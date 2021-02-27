@@ -1,2 +1,5 @@
 # Env file
 .env
+
+# Pycache
+cogs/__pycache__/
