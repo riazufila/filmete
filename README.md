@@ -14,4 +14,7 @@ Finally, clone the repository and execute Filmete.
 
 ## Bot Commands
 
-TODO
+| Commands | Parameters | Description |
+| :-------------: |:-------------:| -------------|
+| create | \<url\> | Creates room in Watch2Gether. |
+| remind | \<period\> \<url\> |   Set a reminder. |
