@@ -129,8 +129,8 @@ class Room(commands.Cog):
                 await ctx.send(embed=result)
         else:
             reply = [
-                "Are you drunk?", "You.. typing right?", "Ahahahaha, funny.",
-                "DON'T DARE!", "LOL WRONG HAHA!"
+                "Are you drunk?", "You..  alright?", "Ahahahaha, funny.",
+                "DON'T DARE ENTER THE WRONG COMMAND!", "LOL WRONG HAHA!"
             ]
             await ctx.send(random.choice(reply))
 
