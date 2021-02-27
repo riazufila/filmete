@@ -24,5 +24,9 @@ if __name__ == "__main__":
     for extension in extensions:
         bot.load_extension(extension)
 
+    @bot.event
+    async def on_ready():
+        print(f"{bot.user} is now ready to rock and roll!")
+
     # Run bot with TOKEN
     bot.run(TOKEN)
