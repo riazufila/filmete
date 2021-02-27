@@ -155,7 +155,7 @@ class Room(commands.Cog):
             reply = [
                 f"Are you drunk, <@{ctx.author.id}>?",
                 f"<@{ctx.author.id}>.. You..  alright?",
-                f"Ahahahaha, funny, <@{ctx.author.id}>.",
+                f"Ahahahaha. Funny, <@{ctx.author.id}>.",
                 f"DON'T DARE ENTER THE WRONG COMMAND, <@{ctx.author.id}>!",
                 f"LOL WRONG HAHA, <@{ctx.author.id}>!"
             ]
