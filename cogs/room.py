@@ -47,7 +47,7 @@ class Room(commands.Cog):
         return room_url
 
     # Create room command
-    @commands.command(help="Creates room in Watch2Gether.")
+    @commands.command(name="create", help="Creates room in Watch2Gether.")
     async def create(self, ctx, video_url):
 
         result = self.roomCreation(video_url)
