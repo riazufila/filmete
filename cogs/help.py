@@ -15,10 +15,7 @@ class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='help',
-                      description='Help command',
-                      aliases=['info', 'commands'],
-                      case_insensitive=True)
+    @commands.command(name='help', description='Help command')
     async def help_command(self, ctx, *commands: str):
         """ Shows this message """
         bot = ctx.bot
