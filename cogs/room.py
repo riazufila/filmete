@@ -14,6 +14,7 @@ class Room(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.W2G_API_KEY = self.getSecrets()
+        self.guilds = {}
 
     def getSecrets(self):
         # Get env data
@@ -23,11 +24,12 @@ class Room(commands.Cog):
         return W2G_API_KEY
 
     def roomDivision(self, ctx, room_url):
-        guilds = {} 
-        if len(guilds[ctx.guild.id]) == 0:
-            guilds[ctx.guild.id] = [room_url]
+        print(self.guilds)
+        if not ctx.guild.id in self.guilds:
+            self.guilds[ctx.guild.id] = [room_url]
         else:
-            guilds[ctx.guild.id].append(room_url)
+            self.guilds[ctx.guild.id].append(room_url)
+        print(self.guilds)
 
     # Room creation with Watch2Gether API
     def roomCreation(self, ctx, video_url):
@@ -55,7 +57,7 @@ class Room(commands.Cog):
             streamkey = response.json().get("streamkey")
             room_url = f"https://w2g.tv/rooms/{streamkey}"
 
-            roomDivision(ctx, room_url)
+            self.roomDivision(ctx, room_url)
 
             embed = discord.Embed(
                 title="Let's watch together?",
