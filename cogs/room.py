@@ -22,8 +22,15 @@ class Room(commands.Cog):
 
         return W2G_API_KEY
 
+    def roomDivision(self, ctx, room_url):
+        guilds = {} 
+        if len(guilds[ctx.guild.id]) == 0:
+            guilds[ctx.guild.id] = [room_url]
+        else:
+            guilds[ctx.guild.id].append(room_url)
+
     # Room creation with Watch2Gether API
-    def roomCreation(self, video_url):
+    def roomCreation(self, ctx, video_url):
         if not "http" in video_url:
             return "Is that even a valid url?"
         else:
@@ -48,6 +55,8 @@ class Room(commands.Cog):
             streamkey = response.json().get("streamkey")
             room_url = f"https://w2g.tv/rooms/{streamkey}"
 
+            roomDivision(ctx, room_url)
+
             embed = discord.Embed(
                 title="Let's watch together?",
                 description=
@@ -61,7 +70,7 @@ class Room(commands.Cog):
     @commands.command(name="create", help="Creates room in Watch2Gether.")
     async def create(self, ctx, url):
 
-        result = self.roomCreation(url)
+        result = self.roomCreation(ctx, url)
 
         await ctx.send(embed=result)
 
@@ -149,7 +158,7 @@ class Room(commands.Cog):
                                       color=0x000000)
                 await ctx.send(embed=embed)
             else:
-                result = self.roomCreation(url)
+                result = self.roomCreation(ctx, url)
                 await ctx.send(embed=result)
         else:
             reply = [
