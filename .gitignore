@@ -3,3 +3,9 @@
 
 # Pycache
 **/__pycache__/
+
+# Virtual Environment
+.venv/
+
+# vscode
+.vscode/
