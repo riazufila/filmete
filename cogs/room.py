@@ -31,6 +31,22 @@ class Room(commands.Cog):
             self.guilds[ctx.guild.id].append(room_url)
         print(self.guilds)
 
+
+    # Print room lists with Watch2Gether API
+    def roomList(self, ctx):
+        if not(self.guilds): #dictionary is empty
+            return('This list empty')
+        else:
+            return(json.dumps(self.guilds, indent=4))
+
+    # Print list command
+    @commands.command(name="list", help="List of rooms available.")
+    async def list(self, ctx):
+
+        result = self.roomList(ctx)
+
+        await ctx.send(result)
+
     # Room creation with Watch2Gether API
     def roomCreation(self, ctx, video_url):
         if not "http" in video_url:
