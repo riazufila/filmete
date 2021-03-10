@@ -10,13 +10,23 @@ Firstly, you will need to sign up a discord account prior of creating a bot. The
 
 After that, you will need to follow the guide in https://community.w2g.tv/t/watch2gether-api-documentation/133767 to make use of Watch2Gether API that this bot will use for synced streaming.
 
-Finally, clone the repository and execute Filmete.
+Then, clone the repository and create a new file named `.env` in the project folder that should contain the API key for Discord Bot and Watch2Gether labeled as DISCORD_TOKEN and W2G_API_KEY respectively.
+
+For example:
+
+```
+DISCORD_TOKEN = bot_key
+W2G_API_KEY = w2g_key
+```
+
+Finally, execute Filmete.
 
 ## Bot Commands
 
 The character ";" is our bot's prefix. Hence, every command is expected to start with the said prefix.
 
-| Commands |     Parameters     | Description                   |
-| :------: | :----------------: | ----------------------------- |
-|  create  |      \<url\>       | Creates room in Watch2Gether. |
-|  remind  | \<period\> \<url\> | Set a reminder.               |
+| Commands |     Parameters     | Description                       |
+| :------: | :----------------: | --------------------------------- |
+|  create  |      \<url\>       | Creates room in Watch2Gether.     |
+|  remind  | \<period\> \<url\> | Set a reminder.                   |
+|  search  |      \<text\>      | Searches for videos from YouTube. |
