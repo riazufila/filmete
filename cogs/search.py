@@ -12,11 +12,11 @@ class Search(commands.Cog):
     @commands.command(name="search", help="Searches for videos from YouTube.")
     async def search(self, ctx, text):
         payload = {"search_query": text}
-        response = requests.get("http://www.youtube.com/results",
+        response = requests.get("https://www.youtube.com/results",
                                 params=payload)
         search_results = re.findall(r'/watch\?v=(.{11})', response.text)
 
-        await ctx.send(search_results)
+        await ctx.send("https://www.youtube.com/watch?v=" + search_results[0])
 
 
 def setup(bot):
