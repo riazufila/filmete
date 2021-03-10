@@ -25,7 +25,8 @@ Finally, execute Filmete.
 
 The character ";" is our bot's prefix. Hence, every command is expected to start with the said prefix.
 
-| Commands |     Parameters     | Description                   |
-| :------: | :----------------: | ----------------------------- |
-|  create  |      \<url\>       | Creates room in Watch2Gether. |
-|  remind  | \<period\> \<url\> | Set a reminder.               |
+| Commands |     Parameters     | Description                       |
+| :------: | :----------------: | --------------------------------- |
+|  create  |      \<url\>       | Creates room in Watch2Gether.     |
+|  remind  | \<period\> \<url\> | Set a reminder.                   |
+|  search  |      \<text\>      | Searches for videos from YouTube. |
