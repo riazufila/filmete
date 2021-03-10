@@ -10,13 +10,20 @@ class Search(commands.Cog):
         self.bot = bot
 
     @commands.command(name="search", help="Searches for videos from YouTube.")
-    async def search(self, ctx, text):
+    async def search(self, ctx, text: str):
         payload = {"search_query": text}
         response = requests.get("https://www.youtube.com/results",
                                 params=payload)
         search_results = re.findall(r'/watch\?v=(.{11})', response.text)
 
-        await ctx.send("https://www.youtube.com/watch?v=" + search_results[0])
+        if search_results:
+            await ctx.send(f"Yo, <@{ctx.author.id}>! We've got a hit!")
+            await ctx.send(
+                f"https://www.youtube.com/watch?v={search_results[0]}")
+        else:
+            await ctx.send(
+                f"Sorry, <@{ctx.author.id}>. No results were found. Another keyword maybe?"
+            )
 
 
 def setup(bot):
