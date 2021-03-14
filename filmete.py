@@ -12,7 +12,7 @@ if __name__ == "__main__":
     # Bot setup
     bot = commands.Bot(
         command_prefix="filmete;",
-        description='Filmete creates virtual room for synced streaming.')
+        description='Creates virtual room for synced streaming.')
 
     bot.remove_command("help")
 

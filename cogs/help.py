@@ -6,8 +6,8 @@ from discord.ext import commands
 
 prefix = 'filmete;'
 bot_title = 'Filmete'
-bot_description = 'Filmete creates virtual room for synced streaming.'
-bottom_info = ''
+bot_description = 'Creates virtual room for synced streaming.'
+bottom_info = 'https://github.com/riazufila/filmete'
 
 
 class Help(commands.Cog):
