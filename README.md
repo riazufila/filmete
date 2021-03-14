@@ -23,7 +23,7 @@ Finally, execute Filmete.
 
 ## Bot Commands
 
-The character ";" is our bot's prefix. Hence, every command is expected to start with the said prefix.
+The character "filmete;" is our bot's prefix. Hence, every command is expected to start with the said prefix.
 
 | Commands |     Parameters     | Description                       |
 | :------: | :----------------: | --------------------------------- |
