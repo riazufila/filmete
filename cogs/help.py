@@ -6,7 +6,7 @@ from discord.ext import commands
 
 prefix = 'filmete;'
 bot_title = 'Filmete'
-bot_description = 'A Discord Bot to create a virtual room for synced streaming.'
+bot_description = 'Filmete creates virtual room for synced streaming.'
 bottom_info = ''
 
 
