@@ -9,16 +9,12 @@ if __name__ == "__main__":
     load_dotenv()
     TOKEN = os.getenv("DISCORD_TOKEN")
 
-    # Discord command prefix
-    help_command = commands.DefaultHelpCommand(no_category="Commands",
-                                               indent=4)
+    # Bot setup
     bot = commands.Bot(
         command_prefix=";",
         description=
-        'A Discord Bot to create a virtual room for synced streaming.',
-        help_command=help_command)
+        'A Discord Bot to create a virtual room for synced streaming.')
 
-    # Remove default help command
     bot.remove_command("help")
 
     # Load extensions (cog)
@@ -27,9 +23,10 @@ if __name__ == "__main__":
     for extension in extensions:
         bot.load_extension(extension)
 
+    # Bot on_ready event
     @bot.event
     async def on_ready():
         print(f"{bot.user} is now ready to rock and roll!")
 
-    # Run bot with TOKEN
+    # Run bot
     bot.run(TOKEN)
