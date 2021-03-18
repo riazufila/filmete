@@ -24,28 +24,42 @@ class Room(commands.Cog):
         return W2G_API_KEY
 
     def roomDivision(self, ctx, room_url):
-        print(self.guilds)
         if not ctx.guild.id in self.guilds:
             self.guilds[ctx.guild.id] = [room_url]
         else:
             self.guilds[ctx.guild.id].append(room_url)
-        print(self.guilds)
 
-
-    # Print room lists with Watch2Gether API
-    def roomList(self, ctx):
-        if not(self.guilds): #dictionary is empty
-            return('This list empty')
-        else:
-            return(json.dumps(self.guilds, indent=4))
 
     # Print list command
     @commands.command(name="list", help="List of rooms available.")
     async def list(self, ctx):
+        result_buffer = ""
+        check = False
 
-        result = self.roomList(ctx)
+        # Dictionary is empty for current guild
+        if not ctx.guild.id in self.guilds:
+            check = True
+            result = f"This list is empty, <@{ctx.author.id}>."
+        else:
+            result = self.guilds[ctx.guild.id]
 
-        await ctx.send(result)
+        if check == False:
+            for r in result:
+                result_buffer = result_buffer + "\n" + r
+
+            embed = discord.Embed(
+                    title="Room list",
+                    description=
+                    "This is all the rooms created in the server.",
+                    color=0x000000)
+            embed.add_field(name="Room's URL", value=result_buffer)
+
+            await ctx.send(embed=embed)
+
+        else:
+            await ctx.send(result)
+
+    
 
     # Room creation with Watch2Gether API
     def roomCreation(self, ctx, video_url):
