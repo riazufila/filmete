@@ -183,15 +183,25 @@ class Room(commands.Cog):
             await ctx.send(
                 f"Yo, <@{ctx.author.id}>! It has already been {period}!")
 
+            await ctx.author.send(
+                f"Yo, <@{ctx.author.id}>! It has already been {period}!")
+
             if not "http" in url:
                 url = '"' + url + '"'
                 embed = discord.Embed(title="You forgetting something?",
                                       description=url,
                                       color=0x000000)
+
                 await ctx.send(embed=embed)
+
+                # Send reminder to direct message author
+                await ctx.author.send(embed=embed)
             else:
                 result = self.roomCreation(ctx, url)
                 await ctx.send(embed=result)
+
+                # Send reminder to direct message author http
+                await ctx.author.send(embed=result)
         else:
             reply = [
                 f"Are you drunk, <@{ctx.author.id}>?",
